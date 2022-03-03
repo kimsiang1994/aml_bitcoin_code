@@ -33,7 +33,10 @@ def get_raw_block_data(block_hash):
     return(response.json())
 
 def get_block_hash_list(): 
-    df = pd.read_excel('formatted_blockhash_list.xlsx')
+    # df = pd.read_excel('formatted_blockhash_list.xlsx')
+
+    # Running some tests here
+    df = pd.read_excel('trial_formatted_blockhash_list.xlsx')
     mylist = df['block_hash'].tolist()
 
     return(mylist)
@@ -231,38 +234,38 @@ def store_raw_transaction_data(txn_list):
     return(txn_dictionary)
 
 
-# Scripts
-# Testing block api
-block_input = "00000000000000000009293e762758c4d9eb0ef11574f42eb3599d2040269bf4"
-block_output = get_raw_block_data(block_input)
-formatted_block_output = format_json(block_output)
-block_object_output = create_python_object_from_json(formatted_block_output)
+# # Scripts
+# # Testing block api
+# block_input = "00000000000000000009293e762758c4d9eb0ef11574f42eb3599d2040269bf4"
+# block_output = get_raw_block_data(block_input)
+# formatted_block_output = format_json(block_output)
+# block_object_output = create_python_object_from_json(formatted_block_output)
 
 # Actual block functions
 list_of_block_hash = get_block_hash_list()
 block_dictionary = store_raw_block_data(list_of_block_hash)
 convert_pd_to_excel(block_dictionary, "block_dictionary")
 
-# Testing address api
-address_input = "17piFVhBrJpj1FGeYgGpDUjrtXcP5sQpvn"
-address_output = get_raw_address_data(address_input)
-formatted_address_output = format_json(address_output)
-address_object_output = create_python_object_from_json(formatted_address_output)
+# # Testing address api
+# address_input = "17piFVhBrJpj1FGeYgGpDUjrtXcP5sQpvn"
+# address_output = get_raw_address_data(address_input)
+# formatted_address_output = format_json(address_output)
+# address_object_output = create_python_object_from_json(formatted_address_output)
 
-# Actual address functions
-# Ponzi address info
-list_of_addresses = get_address_from_excel_list()
-ponzi_address_dictionary = store_raw_address_data(list_of_addresses)
-convert_pd_to_excel(ponzi_address_dictionary, "ponzi_address_dictionary")
+# # Actual address functions
+# # Ponzi address info
+# list_of_addresses = get_address_from_excel_list()
+# ponzi_address_dictionary = store_raw_address_data(list_of_addresses)
+# convert_pd_to_excel(ponzi_address_dictionary, "ponzi_address_dictionary")
 
-# Actual txn functions
-block_transaction_list = get_raw_transaction_list_from_blocks(block_dictionary)
-ponzi_transaction_list = get_raw_transaction_list_from_address(ponzi_address_dictionary)
+# # Actual txn functions
+# block_transaction_list = get_raw_transaction_list_from_blocks(block_dictionary)
+# ponzi_transaction_list = get_raw_transaction_list_from_address(ponzi_address_dictionary)
 
-stored_block_txn_data = store_raw_transaction_data(block_transaction_list)
-convert_pd_to_excel(stored_block_txn_data, "stored_block_txn_data")
-stored_ponzi_txn_data = store_raw_transaction_data(ponzi_transaction_list)
-convert_pd_to_excel(stored_ponzi_txn_data, "stored_ponzi_txn_data")
+# stored_block_txn_data = store_raw_transaction_data(block_transaction_list)
+# convert_pd_to_excel(stored_block_txn_data, "stored_block_txn_data")
+# stored_ponzi_txn_data = store_raw_transaction_data(ponzi_transaction_list)
+# convert_pd_to_excel(stored_ponzi_txn_data, "stored_ponzi_txn_data")
 
 # Prints for tests
 # print(address_object_output["address"])
